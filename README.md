@@ -144,33 +144,6 @@ data/
 
 ---
 
-## How the modernized code differs from the 3-year-old course project
-
-The original (`old_code/`) shipped:
-
-- `class MinHeap` with a `string/int/int/string` `HeapNode` baked into
-  the data structure, raw `new` + leak, no `erase`, no iterator.
-- `class RedBlackTree` with the same `RBNode` baked in, raw pointers,
-  `using namespace std;` at the top, no const-correctness, and a
-  known bug where `SearchRuntimes` indexes past `nodes.size()` when
-  fewer than 10 matches exist.
-
-The modernized version:
-
-- **Templates.** Both containers take `<T, Compare>`; the same code
-  drives `MinHeap<Movie, std::greater<Movie>>`, a max-heap of ints,
-  or a custom comparator.
-- **Resource safety.** Heap stores `T` by value inside `std::vector`;
-  tree owns nodes through `std::allocator`. No leaks, no raw `new`.
-- **Complete STL-style interface.** Bidirectional iterators, `find`,
-  `lower_bound` / `upper_bound`, `insert(pair)`, `emplace`, `operator[]`.
-- **Algorithm correctness verified.** 30 RBT cases include
-  `verify_invariants()` after every insert/erase — black-height, red
-  parent / red child, BST order, parent pointers.
-- **Real data path.** Loader handles BOM stripping, CRLF endings,
-  quoted fields with doubled-quote escaping, and rating/votes columns
-  that may be missing on older IMDb dumps.
-
 ---
 
 ## License
@@ -185,7 +158,7 @@ MIT — see [LICENSE](LICENSE).
 > **O(N log K)** 时间复杂度内对 IMDb 影片排序,与 `std::priority_queue` /
 > `std::map` 同台对标。
 
-## 这个项目值得看的原因
+## 亮点
 
 1. **算法深度。** 两个教科书级数据结构用现代 C++17 从零实现——左倾
    红黑树带哨兵 NIL 节点,二叉小顶堆模板化在严格弱序上。
@@ -225,14 +198,6 @@ ctest --test-dir build --output-on-failure -j1
 
 我们的查找和混合负载比 `std::map` 快 20–26%。`std::map` 因为是头文件
 库 + 类型擦除比较器 + 把颜色存在父指针的高位里,在这些路径上反而慢。
-
-## 与 3 年前课设的对比
-
-原版(`old_code/`)有:硬编码 `HeapNode{string,int,int,string}`、`new`
-裸指针泄漏、没有 `erase`、没有迭代器、已知越界 bug。
-
-现在:模板化、RAII、完整 STL 接口、迭代器、边界 case 全覆盖、真实数据
-路径带 BOM/CRLF/引号转义处理。
 
 ## 许可证
 
