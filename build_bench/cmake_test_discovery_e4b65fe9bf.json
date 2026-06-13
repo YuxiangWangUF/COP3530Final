@@ -1,0 +1,169 @@
+{
+  "tests": 23,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "EmptyInput",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "EmptyFileYieldsZeroRows",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 85
+        },
+        {
+          "name": "HeaderOnlyYieldsZeroRows",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 95
+        },
+        {
+          "name": "MissingFileThrows",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 104
+        }
+      ]
+    },
+    {
+      "name": "SingleRow",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "ParsesAllFields",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 114
+        },
+        {
+          "name": "MissingFieldsBecomeDefaults",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 131
+        },
+        {
+          "name": "RatingAndVotesColumnsMayBeAbsent",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 145
+        }
+      ]
+    },
+    {
+      "name": "Filter",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "RatingThreshold",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 161
+        },
+        {
+          "name": "VotesThreshold",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 174
+        },
+        {
+          "name": "CombinedRatingAndVotes",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 187
+        },
+        {
+          "name": "AllowedTitleTypes",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 202
+        }
+      ]
+    },
+    {
+      "name": "Escape",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "QuotedTitleWithCommaIsUnescaped",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 221
+        },
+        {
+          "name": "DoubledQuoteInsideFieldBecomesSingleQuote",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 232
+        },
+        {
+          "name": "EscapedTabInsideQuotedFieldPreserved",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 243
+        }
+      ]
+    },
+    {
+      "name": "Encoding",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "Utf8TitleBytesArePreserved",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 257
+        },
+        {
+          "name": "CrlfLineEndingsAreTolerated",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 271
+        },
+        {
+          "name": "BomIsStrippedFromFirstLine",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 282
+        }
+      ]
+    },
+    {
+      "name": "Streaming",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "VisitorReturningFalseStopsEarly",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 298
+        },
+        {
+          "name": "ProgressCallbackFiresAtConfiguredInterval",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 318
+        },
+        {
+          "name": "ThinApiForEachMovieDeliversEachRow",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 339
+        },
+        {
+          "name": "ThinApiLoadMoviesFiltersByThreshold",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 353
+        }
+      ]
+    },
+    {
+      "name": "Error",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "MalformedRowIsCountedAndStreamContinues",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 370
+        }
+      ]
+    },
+    {
+      "name": "SampleFixture",
+      "tests": 2,
+      "testsuite": [
+        {
+          "name": "LoadsRowsFromSampleTsv",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 389
+        },
+        {
+          "name": "MovieOrderingIsDefined",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_loader.cpp",
+          "line": 422
+        }
+      ]
+    }
+  ]
+}

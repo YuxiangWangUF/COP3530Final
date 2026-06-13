@@ -1,0 +1,61 @@
+2026-06-13T13:32:53+08:00
+Running D:\Code\IMDb-Top250-Recommender\build_bench\bench_rbtree.exe
+Run on (28 X 3418 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x14)
+  L1 Instruction 32 KiB (x14)
+  L2 Unified 2048 KiB (x14)
+  L3 Unified 33792 KiB (x1)
+----------------------------------------------------------------------------------------
+Benchmark                              Time             CPU   Iterations UserCounters...
+----------------------------------------------------------------------------------------
+BM_StdMap_InsertOnly/1024          57817 ns        55804 ns        11200 items_per_second=18.3501M/s
+BM_StdMap_InsertOnly/4096         224129 ns       224609 ns         3200 items_per_second=18.2361M/s
+BM_StdMap_InsertOnly/32768       1844077 ns      1801273 ns          373 items_per_second=18.1916M/s
+BM_StdMap_InsertOnly/262144     18512144 ns     17922794 ns           34 items_per_second=14.6263M/s
+BM_StdMap_InsertOnly/1048576    87942186 ns     87053571 ns            7 items_per_second=12.0452M/s
+BM_OurRBT_InsertOnly/1024          52845 ns        51618 ns        11200 items_per_second=19.8379M/s
+BM_OurRBT_InsertOnly/4096         205057 ns       200195 ns         3200 items_per_second=20.46M/s
+BM_OurRBT_InsertOnly/32768       1798669 ns      1801273 ns          373 items_per_second=18.1916M/s
+BM_OurRBT_InsertOnly/262144     19833649 ns     19003378 ns           37 items_per_second=13.7946M/s
+BM_OurRBT_InsertOnly/1048576    93498686 ns     91517857 ns            7 items_per_second=11.4576M/s
+BM_StdMap_Lookup/1024              26803 ns        26228 ns        28000 items_per_second=39.0427M/s
+BM_StdMap_Lookup/4096             196155 ns       194972 ns         3446 items_per_second=21.0081M/s
+BM_StdMap_Lookup/32768           2593066 ns      2604167 ns          264 items_per_second=12.5829M/s
+BM_StdMap_Lookup/262144         45752607 ns     45833333 ns           15 items_per_second=5.71951M/s
+BM_StdMap_Lookup/1048576       415371300 ns    414062500 ns            2 items_per_second=2.53241M/s
+BM_OurRBT_Lookup/1024              15710 ns        15695 ns        44800 items_per_second=65.2447M/s
+BM_OurRBT_Lookup/4096             178746 ns       176467 ns         4073 items_per_second=23.2111M/s
+BM_OurRBT_Lookup/32768           2566603 ns      2566964 ns          280 items_per_second=12.7653M/s
+BM_OurRBT_Lookup/262144         50116036 ns     48295455 ns           11 items_per_second=5.42792M/s
+BM_OurRBT_Lookup/1048576       450293650 ns    437500000 ns            2 items_per_second=2.39675M/s
+BM_StdMap_Ascending/1024           56790 ns        57199 ns        11200 items_per_second=17.9025M/s
+BM_StdMap_Ascending/4096          225551 ns       208575 ns         3446 items_per_second=19.638M/s
+BM_StdMap_Ascending/32768        1855966 ns      1881143 ns          407 items_per_second=17.4192M/s
+BM_StdMap_Ascending/262144      18254432 ns     17911585 ns           41 items_per_second=14.6354M/s
+BM_StdMap_Ascending/1048576     88120029 ns     89285714 ns            7 items_per_second=11.7441M/s
+BM_OurRBT_Ascending/1024           52960 ns        50223 ns        11200 items_per_second=20.389M/s
+BM_OurRBT_Ascending/4096          215003 ns       205078 ns         3200 items_per_second=19.9729M/s
+BM_OurRBT_Ascending/32768        1855415 ns      1801273 ns          373 items_per_second=18.1916M/s
+BM_OurRBT_Ascending/262144      19938784 ns     19003378 ns           37 items_per_second=13.7946M/s
+BM_OurRBT_Ascending/1048576     93120433 ns     92013889 ns            9 items_per_second=11.3958M/s
+BM_StdMap_InsertErase/1024        101123 ns        97656 ns         6400 items_per_second=10.4858M/s
+BM_StdMap_InsertErase/4096        404959 ns       408082 ns         1723 items_per_second=10.0372M/s
+BM_StdMap_InsertErase/32768      3361010 ns      3301056 ns          213 items_per_second=9.92652M/s
+BM_StdMap_InsertErase/262144    31131304 ns     29296875 ns           24 items_per_second=8.94785M/s
+BM_StdMap_InsertErase/1048576  141224220 ns    140625000 ns            5 items_per_second=7.45654M/s
+BM_OurRBT_InsertErase/1024         78333 ns        73242 ns         8960 items_per_second=13.981M/s
+BM_OurRBT_InsertErase/4096        315191 ns       320871 ns         2240 items_per_second=12.7653M/s
+BM_OurRBT_InsertErase/32768      2704604 ns      2604167 ns          264 items_per_second=12.5829M/s
+BM_OurRBT_InsertErase/262144    27931827 ns     27644231 ns           26 items_per_second=9.48277M/s
+BM_OurRBT_InsertErase/1048576  126545450 ns    125000000 ns            6 items_per_second=8.38861M/s
+BM_StdMap_Iterate/1024              2829 ns         2825 ns       248889 items_per_second=362.471M/s
+BM_StdMap_Iterate/4096             13700 ns        12835 ns        56000 items_per_second=319.132M/s
+BM_StdMap_Iterate/32768           115552 ns       108817 ns         5600 items_per_second=301.13M/s
+BM_StdMap_Iterate/262144         1263412 ns      1223645 ns          498 items_per_second=214.232M/s
+BM_StdMap_Iterate/1048576        8180536 ns      7672991 ns          112 items_per_second=136.658M/s
+BM_OurRBT_Iterate/1024              2940 ns         2916 ns       235789 items_per_second=351.197M/s
+BM_OurRBT_Iterate/4096             14335 ns        14125 ns        49778 items_per_second=289.978M/s
+BM_OurRBT_Iterate/32768           116404 ns       114746 ns         6400 items_per_second=285.57M/s
+BM_OurRBT_Iterate/262144         1198591 ns      1196289 ns          640 items_per_second=219.131M/s
+BM_OurRBT_Iterate/1048576        7626178 ns      7465278 ns           90 items_per_second=140.46M/s

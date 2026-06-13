@@ -49,3 +49,8 @@ latex/
 Thumbs.db
 .DS_Store
 cmake_config.log
+
+# Staged FetchContent payloads (used when sandboxed CI can't reach
+# github.com over SSL).  The .deps/ directory holds a pre-downloaded
+# zipball that FetchContent consumes instead of redownloading.
+.deps/

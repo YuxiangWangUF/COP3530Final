@@ -348,6 +348,7 @@ class RedBlackTree {
                 n = n->right;
             }
         }
+        if (lb == nil_) return end();
         return iterator(lb, this);
     }
 
@@ -362,6 +363,7 @@ class RedBlackTree {
                 n = n->right;
             }
         }
+        if (lb == nil_) return cend();
         return const_iterator(lb, this);
     }
 
@@ -376,6 +378,7 @@ class RedBlackTree {
                 n = n->right;
             }
         }
+        if (ub == nil_) return end();
         return iterator(ub, this);
     }
 
@@ -390,6 +393,7 @@ class RedBlackTree {
                 n = n->right;
             }
         }
+        if (ub == nil_) return cend();
         return const_iterator(ub, this);
     }
 
@@ -479,9 +483,18 @@ class RedBlackTree {
 
     // ---- Iteration --------------------------------------------------------
 
-    iterator begin() noexcept { return iterator(min_node(root_), this); }
-    const_iterator begin() const noexcept { return const_iterator(min_node(root_), this); }
-    const_iterator cbegin() const noexcept { return const_iterator(min_node(root_), this); }
+    iterator begin() noexcept {
+        if (root_ == nil_) return end();
+        return iterator(min_node(root_), this);
+    }
+    const_iterator begin() const noexcept {
+        if (root_ == nil_) return end();
+        return const_iterator(min_node(root_), this);
+    }
+    const_iterator cbegin() const noexcept {
+        if (root_ == nil_) return cend();
+        return const_iterator(min_node(root_), this);
+    }
 
     iterator end() noexcept { return iterator(nullptr, this); }
     const_iterator end() const noexcept { return const_iterator(nullptr, this); }
@@ -663,48 +676,59 @@ class RedBlackTree {
     }
 
     /// Minimum node in subtree rooted at n. Returns nil_ for empty.
-    static Node* min_node(Node* n) noexcept {
-        if (n == nullptr) return nullptr;
-        while (n->left != nullptr) n = n->left;
-        return n;
+    /// NB: `n` may BE the sentinel -- in that case the function
+    /// returns nil_ directly without walking the self-loop.
+    Node* min_node(Node* n) const noexcept {
+        if (n == nil_) return nil_;
+        Node* cur = n;
+        while (cur->left != nil_) cur = cur->left;
+        return cur;
     }
-    static Node* max_node(Node* n) noexcept {
-        if (n == nullptr) return nullptr;
-        while (n->right != nullptr) n = n->right;
-        return n;
+    Node* max_node(Node* n) const noexcept {
+        if (n == nil_) return nil_;
+        Node* cur = n;
+        while (cur->right != nil_) cur = cur->right;
+        return cur;
     }
-    static Node* next_node_in_tree(Node* n) noexcept {
-        if (n->right != nullptr) {
-            n = n->right;
-            while (n->left != nullptr) n = n->left;
-            return n;
+    /// In-order successor of `n` in the tree rooted at root_. Returns
+    /// nil_ when there is no successor. The caller converts nil_ to
+    /// nullptr to represent end().
+    Node* next_node_in_tree(Node* n) const noexcept {
+        if (n == nil_) return nil_;
+        if (n->right != nil_) {
+            Node* cur = n->right;
+            while (cur->left != nil_) cur = cur->left;
+            return cur;
         }
         Node* p = n->parent;
-        while (p != nullptr && n == p->right) {
+        while (p != nil_ && n == p->right) {
             n = p;
             p = p->parent;
         }
-        return p;  // nullptr signals end()
+        return p;  // may be nil_ if n was the max
     }
-    static Node* prev_node_in_tree(Node* n) noexcept {
-        if (n->left != nullptr) {
-            n = n->left;
-            while (n->right != nullptr) n = n->right;
-            return n;
+    /// In-order predecessor. Mirror of next_node_in_tree.
+    Node* prev_node_in_tree(Node* n) const noexcept {
+        if (n == nil_) return nil_;
+        if (n->left != nil_) {
+            Node* cur = n->left;
+            while (cur->right != nil_) cur = cur->right;
+            return cur;
         }
         Node* p = n->parent;
-        while (p != nullptr && n == p->left) {
+        while (p != nil_ && n == p->left) {
             n = p;
             p = p->parent;
         }
-        return p;
+        return p;  // may be nil_ if n was the min
     }
     Node* next_node(Node* n) const noexcept {
-        if (n == nil_) return nullptr;  // never called on nil_, but be safe
+        if (n == nil_) return nullptr;
         Node* res = next_node_in_tree(n);
         return res == nil_ ? nullptr : res;
     }
     Node* prev_node(Node* n) const noexcept {
+        if (n == nil_) return nullptr;
         Node* res = prev_node_in_tree(n);
         return res == nil_ ? nullptr : res;
     }
@@ -803,19 +827,20 @@ class RedBlackTree {
         x->color = rbt_detail::Color::Black;
     }
 
-    [[nodiscard]] bool verify_node(Node* n) const noexcept {
+[[nodiscard]] bool verify_node(Node* n) const noexcept {
         if (n == nil_) return true;
         // No double-red.
         if (n->color == rbt_detail::Color::Red) {
             if (n->left->color == rbt_detail::Color::Red) return false;
             if (n->right->color == rbt_detail::Color::Red) return false;
         }
-        // BST order.
-        if (n->left != nil_ && comp_(n->key, n->left->key)) return false;
-        if (n->right != nil_ && comp_(n->right->key, n->key)) return false;
-        // Parent pointers.
-        if (n->left->parent != n) return false;
-        if (n->right->parent != n) return false;
+        // BST order: left subtree < n, n < right subtree.
+        if (n->left != nil_ && !comp_(n->left->key, n->key)) return false;
+        if (n->right != nil_ && !comp_(n->key, n->right->key)) return false;
+        // Parent pointers (only for non-nil children -- nil is a shared
+        // sentinel and its parent is meaningless for verification).
+        if (n->left != nil_ && n->left->parent != n) return false;
+        if (n->right != nil_ && n->right->parent != n) return false;
         return verify_node(n->left) && verify_node(n->right);
     }
 };

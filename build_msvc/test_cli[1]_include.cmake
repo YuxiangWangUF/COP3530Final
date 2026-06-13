@@ -1,0 +1,5 @@
+if(EXISTS "D:/Code/IMDb-Top250-Recommender/build_msvc/test_cli[1]_tests.cmake")
+  include("D:/Code/IMDb-Top250-Recommender/build_msvc/test_cli[1]_tests.cmake")
+else()
+  add_test(test_cli_NOT_BUILT test_cli_NOT_BUILT)
+endif()

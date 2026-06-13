@@ -1,0 +1,5 @@
+if(EXISTS "D:/Code/IMDb-Top250-Recommender/build_msvc/test_rbtree[1]_tests.cmake")
+  include("D:/Code/IMDb-Top250-Recommender/build_msvc/test_rbtree[1]_tests.cmake")
+else()
+  add_test(test_rbtree_NOT_BUILT test_rbtree_NOT_BUILT)
+endif()

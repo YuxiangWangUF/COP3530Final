@@ -54,9 +54,19 @@ struct Movie {
         if (a.primary_title != b.primary_title) return a.primary_title < b.primary_title;
         return a.tconst < b.tconst;
     }
-
+    // Derived ordering helpers -- note that with operator< as the
+    // strict-total-order tie-breaker (always breaking on tconst),
+    // operator== can never be true for distinct Movies in practice,
+    // but the compiler can still need them for std::greater / sort
+    // paths used by the CLI and benchmarks.
+    friend bool operator>(const Movie& a, const Movie& b) noexcept { return b < a; }
     friend bool operator==(const Movie& a, const Movie& b) noexcept {
-        return a.tconst == b.tconst && a.primary_title == b.primary_title;
+        return a.tconst == b.tconst
+            && a.primary_title == b.primary_title
+            && a.start_year == b.start_year;
+    }
+    friend bool operator!=(const Movie& a, const Movie& b) noexcept {
+        return !(a == b);
     }
 };
 

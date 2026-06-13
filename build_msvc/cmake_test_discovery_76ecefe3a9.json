@@ -1,0 +1,162 @@
+{
+  "tests": 30,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "RBT",
+      "tests": 30,
+      "testsuite": [
+        {
+          "name": "DefaultCtorIsEmpty",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 22
+        },
+        {
+          "name": "SingleInsertAndLookup",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 32
+        },
+        {
+          "name": "DuplicateInsertReturnsFalse",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 46
+        },
+        {
+          "name": "RandomInsertSortedTraversal",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 56
+        },
+        {
+          "name": "AscendingInsert",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 75
+        },
+        {
+          "name": "DescendingInsert",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 88
+        },
+        {
+          "name": "SubscriptLazyInsert",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 101
+        },
+        {
+          "name": "AtThrowsWhenMissing",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 113
+        },
+        {
+          "name": "EraseLeaf",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 121
+        },
+        {
+          "name": "EraseOneChild",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 131
+        },
+        {
+          "name": "EraseTwoChildren",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 146
+        },
+        {
+          "name": "EraseRoot",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 157
+        },
+        {
+          "name": "EraseAll",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 166
+        },
+        {
+          "name": "EraseMissingReturnsZero",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 186
+        },
+        {
+          "name": "RandomInsertErase",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 194
+        },
+        {
+          "name": "LowerBoundBasic",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 221
+        },
+        {
+          "name": "UpperBoundBasic",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 236
+        },
+        {
+          "name": "EqualRange",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 247
+        },
+        {
+          "name": "RangeBasedFor",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 256
+        },
+        {
+          "name": "IteratorBidirectional",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 268
+        },
+        {
+          "name": "IteratorStabilityAcrossInsert",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 293
+        },
+        {
+          "name": "CopyAndAssign",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 312
+        },
+        {
+          "name": "MoveCtorAndAssign",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 332
+        },
+        {
+          "name": "InitializerList",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 349
+        },
+        {
+          "name": "StressInsertErase",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 357
+        },
+        {
+          "name": "CustomDescendingComparator",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 392
+        },
+        {
+          "name": "ComposeWithMinHeap",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 404
+        },
+        {
+          "name": "EraseDuringIteration",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 429
+        },
+        {
+          "name": "Clear",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 449
+        },
+        {
+          "name": "StressAlternatingDelete",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_rbtree.cpp",
+          "line": 462
+        }
+      ]
+    }
+  ]
+}

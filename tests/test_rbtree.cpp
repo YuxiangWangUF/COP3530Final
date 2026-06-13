@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <set>
 #include <string>
 #include <utility>
 #include <vector>
@@ -55,13 +56,15 @@ TEST(RBT, DuplicateInsertReturnsFalse) {
 TEST(RBT, RandomInsertSortedTraversal) {
     imdb::RedBlackTree<int, int> t;
     std::mt19937 rng(1);
-    std::vector<int> keys;
+    std::set<int> uniq;
     for (int i = 0; i < 200; ++i) {
         int k = static_cast<int>(rng() % 1000);
-        keys.push_back(k);
+        uniq.insert(k);
         t.insert(k, k * 2);
     }
-    EXPECT_EQ(t.size(), keys.size());
+    // RBT rejects duplicate keys, so size equals the count of distinct
+    // random draws (not the count of draws).
+    EXPECT_EQ(t.size(), uniq.size());
     EXPECT_TRUE(t.verify_invariants());
     std::vector<int> seen;
     for (auto& kv : t) seen.push_back(kv.first);
@@ -402,8 +405,11 @@ TEST(RBT, ComposeWithMinHeap) {
     imdb::RedBlackTree<int, int> idx;
     imdb::MinHeap<int, std::greater<int>> topk;
     std::mt19937 rng(99);
+    // Use a unique-key generator -- the RBT is a unique-key associative
+    // container; drawing from % 5000 with a 1000-iteration loop produces
+    // collisions and the test is about composition, not duplicate handling.
     for (int i = 0; i < 1000; ++i) {
-        int k = static_cast<int>(rng() % 5000);
+        int k = i * 7 + 3;          // unique per iteration
         idx.insert(k, k);
         topk.push(k);
         if (topk.size() > 5) topk.pop();

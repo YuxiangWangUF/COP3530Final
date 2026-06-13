@@ -1,0 +1,128 @@
+{
+  "tests": 22,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "MinHeapInt",
+      "tests": 21,
+      "testsuite": [
+        {
+          "name": "DefaultCtorIsEmpty",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 19
+        },
+        {
+          "name": "SingleElement",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 26
+        },
+        {
+          "name": "RandomSequenceTopIsMin",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 37
+        },
+        {
+          "name": "PopSequenceIsSorted",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 46
+        },
+        {
+          "name": "BatchPushHeapRange",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 57
+        },
+        {
+          "name": "Reserve",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 69
+        },
+        {
+          "name": "ReverseOrderPush",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 79
+        },
+        {
+          "name": "Duplicates",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 89
+        },
+        {
+          "name": "MaxHeapWithGreater",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 105
+        },
+        {
+          "name": "InitializerListCtor",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 126
+        },
+        {
+          "name": "RangeCtor",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 133
+        },
+        {
+          "name": "CopyCtor",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 141
+        },
+        {
+          "name": "MoveCtor",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 156
+        },
+        {
+          "name": "MoveAssign",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 166
+        },
+        {
+          "name": "Emplace",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 178
+        },
+        {
+          "name": "RandomizedRoundTrip",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 188
+        },
+        {
+          "name": "TopOnEmptyAsserts",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 204
+        },
+        {
+          "name": "PopOnEmptyAsserts",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 214
+        },
+        {
+          "name": "Clear",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 222
+        },
+        {
+          "name": "Swap",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 233
+        },
+        {
+          "name": "TopKPattern",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 247
+        }
+      ]
+    },
+    {
+      "name": "MinHeapStr",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "LexicographicComparator",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_minheap.cpp",
+          "line": 112
+        }
+      ]
+    }
+  ]
+}

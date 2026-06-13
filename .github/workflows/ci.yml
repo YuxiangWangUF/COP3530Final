@@ -1,0 +1,82 @@
+# IMDb Top-250 Recommender -- CI
+#
+# Matrix: Ubuntu + Windows x GCC + Clang + MSVC, all in C++17 Release.
+# Steps : Configure -> Build -> Test -> Benchmark.
+
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-gcc
+            os: ubuntu-latest
+            cc: gcc
+            cxx: g++
+          - name: linux-clang
+            os: ubuntu-latest
+            cc: clang
+            cxx: clang++
+          - name: windows-msvc
+            os: windows-latest
+            cc: cl
+            cxx: cl
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux build tools
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Install Windows clang
+        if: runner.os == 'Windows' && matrix.cc == 'clang'
+        uses: ConanInc/install-clang@v1
+        with:
+          version: "16"
+
+      - name: Configure
+        run: >
+          cmake -B build -S .
+          -G Ninja
+          -DCMAKE_BUILD_TYPE=Release
+          -DIMDB_BUILD_BENCHMARKS=ON
+          -DCMAKE_C_COMPILER=${{ matrix.cc }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cxx }}
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Test
+        working-directory: build
+        run: ctest --output-on-failure -j1
+        env:
+          IMDB_TEST_DATA: ${{ github.workspace }}/data
+          IMDB_CLI_BIN: ${{ github.workspace }}/build/imdb-topk
+
+      - name: Run benchmarks (informational)
+        if: matrix.os == 'Linux'  # only run on one axis to keep CI time reasonable
+        working-directory: build
+        run: |
+          ./bench_heap --benchmark_min_time=0.1s > bench_heap.txt 2>&1 || true
+          ./bench_rbtree --benchmark_min_time=0.1s > bench_rbtree.txt 2>&1 || true
+          echo "--- bench_heap ---"
+          cat bench_heap.txt | head -25
+          echo "--- bench_rbtree ---"
+          cat bench_rbtree.txt | head -25

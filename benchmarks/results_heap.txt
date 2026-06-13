@@ -1,0 +1,33 @@
+2026-06-13T13:32:27+08:00
+Running D:\Code\IMDb-Top250-Recommender\build_bench\bench_heap.exe
+Run on (28 X 3418 MHz CPU s)
+CPU Caches:
+  L1 Data 48 KiB (x14)
+  L1 Instruction 32 KiB (x14)
+  L2 Unified 2048 KiB (x14)
+  L3 Unified 33792 KiB (x1)
+---------------------------------------------------------------------------------------
+Benchmark                             Time             CPU   Iterations UserCounters...
+---------------------------------------------------------------------------------------
+BM_StdPQ_Random/1024              16189 ns        15381 ns        49778 items_per_second=66.5766M/s
+BM_StdPQ_Random/4096             156353 ns       153460 ns         4480 items_per_second=26.691M/s
+BM_StdPQ_Random/32768           1665354 ns      1612408 ns          407 items_per_second=20.3224M/s
+BM_StdPQ_Random/262144         16812261 ns     16387195 ns           41 items_per_second=15.9969M/s
+BM_StdPQ_Random/1048576        78084644 ns     76388889 ns            9 items_per_second=13.7268M/s
+BM_OurHeap_Random/1024            21703 ns        20996 ns        32000 items_per_second=48.771M/s
+BM_OurHeap_Random/4096           141449 ns       134969 ns         4978 items_per_second=30.3477M/s
+BM_OurHeap_Random/32768         1661399 ns      1568775 ns          498 items_per_second=20.8876M/s
+BM_OurHeap_Random/262144       18137690 ns     17149390 ns           41 items_per_second=15.2859M/s
+BM_OurHeap_Random/1048576      97082850 ns     96354167 ns            6 items_per_second=10.8825M/s
+BM_StdPQ_Ascending/1024           11026 ns        11091 ns        74667 items_per_second=92.3279M/s
+BM_StdPQ_Ascending/4096          105272 ns       106720 ns         7467 items_per_second=38.381M/s
+BM_StdPQ_Ascending/32768         938028 ns       899431 ns          747 items_per_second=36.4319M/s
+BM_StdPQ_Ascending/262144       8321534 ns      8159722 ns           90 items_per_second=32.1266M/s
+BM_StdPQ_Ascending/1048576     34588758 ns     34539474 ns           19 items_per_second=30.3588M/s
+BM_OurHeap_Ascending/1024         20450 ns        20508 ns        37333 items_per_second=49.9317M/s
+BM_OurHeap_Ascending/4096        100949 ns       100442 ns         7467 items_per_second=40.7798M/s
+BM_OurHeap_Ascending/32768      1195739 ns      1171875 ns          560 items_per_second=27.962M/s
+BM_OurHeap_Ascending/262144    12950154 ns     12834821 ns           56 items_per_second=20.4244M/s
+BM_OurHeap_Ascending/1048576   60447900 ns     58238636 ns           11 items_per_second=18.0048M/s
+BM_TopK_StdPQ                    407360 ns       393345 ns         1867 items_per_second=2.66579G/s
+BM_TopK_OurHeap                  404401 ns       371808 ns         1723 items_per_second=2.82021G/s

@@ -6,6 +6,8 @@
 # Run tests:     ctest --test-dir build --output-on-failure
 # Benchmarks:    cmake -B build -S . -DIMDB_BUILD_BENCHMARKS=ON
 #                cmake --build build --target bench_heap bench_rbtree
+#                ./build/bench_heap   (or  bench_rbtree)
+# CLI:           ./build/imdb-topk --data data/sample.tsv --top 5
 #
 # Layering
 # --------
@@ -16,6 +18,10 @@
 #                                include/imdb/RedBlackTree.h,
 #                                tests/test_minheap.cpp,
 #                                tests/test_rbtree.cpp.
+#   * benchmarks-and-cli owns:   src/cli.cpp, benchmarks/bench_heap.cpp,
+#                                benchmarks/bench_rbtree.cpp,
+#                                benchmarks/BENCHMARK.md,
+#                                tests/test_cli.cpp.
 #   * Shared (contract-locked, see docs/foundation.md): Movie.h, Loader.h,
 #                                loader.cpp, this CMakeLists.txt.
 #
@@ -59,10 +65,37 @@ else()
 endif()
 
 # -----------------------------------------------------------------------------
+# OpenMP (optional, off by default)
+# -----------------------------------------------------------------------------
+if(IMDB_USE_OPENMP)
+    find_package(OpenMP REQUIRED)
+    if(OpenMP_CXX_FOUND)
+        add_compile_options(OpenMP_CXX_FLAGS)
+        add_link_options(OpenMP_CXX_FLAGS)
+        add_compile_definitions(IMDB_TOPK_OPENMP)
+        message(STATUS "OpenMP enabled: ${OpenMP_CXX_VERSION}")
+    else()
+        message(WARNING "IMDB_USE_OPENMP=ON but no OpenMP runtime found; building single-threaded")
+    endif()
+endif()
+
+# -----------------------------------------------------------------------------
 # FetchContent -- GoogleTest + GoogleBenchmark.
 # -----------------------------------------------------------------------------
 option(IMDB_BUILD_TESTS      "Build unit tests"           ON)
 option(IMDB_BUILD_BENCHMARKS "Build GoogleBench targets"  OFF)
+option(IMDB_USE_OPENMP       "Parallelize Top-K with OpenMP"  OFF)
+
+# OpenMP -- opt-in. Defaults to OFF so we don't force users into a specific
+# runtime. Set -DIMDB_USE_OPENMP=ON to enable.
+if(IMDB_USE_OPENMP)
+    find_package(OpenMP)
+    if(OpenMP_CXX_FOUND)
+        message(STATUS "OpenMP: ${OpenMP_CXX_VERSION} (${OpenMP_CXX_FLAGS})")
+    else()
+        message(WARNING "IMDB_USE_OPENMP=ON but no OpenMP runtime found; falling back to single-threaded")
+    endif()
+endif()
 
 include(FetchContent)
 
@@ -82,11 +115,23 @@ set(BENCHMARK_ENABLE_TESTING      OFF CACHE BOOL "" FORCE)
 set(BENCHMARK_ENABLE_INSTALL       OFF CACHE BOOL "" FORCE)
 set(BENCHMARK_ENABLE_GTEST_TESTS  OFF CACHE BOOL "" FORCE)
 
-FetchContent_Declare(
-    googlebenchmark
-    URL https://github.com/google/benchmark/archive/refs/tags/v1.8.4.zip
-    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
-)
+# Prefer a pre-staged local zip if it exists (sandboxed CI / behind-firewall
+# hosts may not reach github.com over SSL).  Falls back to a direct download
+# otherwise.
+set(_imdb_bench_zip "${CMAKE_CURRENT_SOURCE_DIR}/.deps/benchmark-1.8.4.zip")
+if(EXISTS "${_imdb_bench_zip}")
+    FetchContent_Declare(
+        googlebenchmark
+        URL "${_imdb_bench_zip}"
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    )
+else()
+    FetchContent_Declare(
+        googlebenchmark
+        URL https://github.com/google/benchmark/archive/refs/tags/v1.8.4.zip
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    )
+endif()
 
 if(IMDB_BUILD_TESTS)
     FetchContent_MakeAvailable(googletest)
@@ -139,6 +184,16 @@ target_include_directories(imdb_core
 target_compile_features(imdb_core PUBLIC cxx_std_${IMDB_CXX_STANDARD})
 target_compile_options(imdb_core PRIVATE ${IMDB_WARN_FLAGS})
 
+# -----------------------------------------------------------------------------
+# CLI driver
+# -----------------------------------------------------------------------------
+# cli.cpp is added ONLY to the imdb-topk executable; it provides main()
+# and must not enter imdb_core (would clash with downstream main() and
+# produce duplicate symbols when static-linked).
+add_executable(imdb-topk src/cli.cpp)
+target_link_libraries(imdb-topk PRIVATE imdb_core)
+target_compile_options(imdb-topk PRIVATE ${IMDB_WARN_FLAGS})
+
 # =============================================================================
 # Tests
 # =============================================================================
@@ -165,6 +220,17 @@ if(IMDB_BUILD_TESTS)
     target_link_libraries(test_rbtree PRIVATE imdb_core GTest::gtest_main)
     target_compile_options(test_rbtree PRIVATE ${IMDB_WARN_FLAGS})
     gtest_discover_tests(test_rbtree)
+
+    # CLI integration: spawns the imdb-topk binary and verifies stdout.
+    # IMDB_CLI_BIN points at the freshly-built executable so the test
+    # always runs the binary it was compiled against.
+    add_executable(test_cli tests/test_cli.cpp)
+    target_link_libraries(test_cli PRIVATE imdb_core GTest::gtest_main)
+    target_compile_options(test_cli PRIVATE ${IMDB_WARN_FLAGS})
+    gtest_discover_tests(test_cli
+        PROPERTIES
+            ENVIRONMENT "IMDB_CLI_BIN=$<TARGET_FILE:imdb-topk>;IMDB_TEST_DATA=${CMAKE_CURRENT_SOURCE_DIR}/data"
+    )
 endif()
 
 # =============================================================================

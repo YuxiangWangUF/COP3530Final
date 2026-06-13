@@ -202,14 +202,20 @@ TEST(MinHeapInt, RandomizedRoundTrip) {
 
 // 18. top() on empty heap asserts (death test)
 TEST(MinHeapInt, TopOnEmptyAsserts) {
+#ifndef NDEBUG
+    // Death tests rely on assert() terminating the process; that contract
+    // only holds in Debug builds. Skip in Release to avoid a false fail.
     imdb::MinHeap<int> h;
     EXPECT_DEATH(static_cast<void>(h.top()), "");
+#endif
 }
 
 // 19. pop() on empty heap asserts
 TEST(MinHeapInt, PopOnEmptyAsserts) {
+#ifndef NDEBUG
     imdb::MinHeap<int> h;
     EXPECT_DEATH(h.pop(), "");
+#endif
 }
 
 // 20. Clear empties the heap

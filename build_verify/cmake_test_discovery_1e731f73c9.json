@@ -1,0 +1,48 @@
+{
+  "tests": 6,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "CliFixture",
+      "tests": 2,
+      "testsuite": [
+        {
+          "name": "Top5HasStrictlyIncreasingRanksAndDescendingRatings",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_cli.cpp",
+          "line": 234
+        },
+        {
+          "name": "MinVotesFilterRemovesLowVoteRows",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_cli.cpp",
+          "line": 289
+        }
+      ]
+    },
+    {
+      "name": "TopK",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "ReturnsEmptyOnZeroK",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_cli.cpp",
+          "line": 320
+        },
+        {
+          "name": "ReturnsAtMostKRows",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_cli.cpp",
+          "line": 325
+        },
+        {
+          "name": "MinVotesFilterIsApplied",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_cli.cpp",
+          "line": 348
+        },
+        {
+          "name": "OutputIsBestFirstUnderOperatorLess",
+          "file": "D:\\Code\\IMDb-Top250-Recommender\\tests\\test_cli.cpp",
+          "line": 365
+        }
+      ]
+    }
+  ]
+}
