@@ -1,0 +1,7 @@
+tconst	titleType	primaryTitle	originalTitle	isAdult	startYear	endYear	runtimeMinutes	genres	averageRating	numVotes
+tt0111161	movie	The Shawshank Redemption	The Shawshank Redemption	0	1994	\N	142	Drama	9.3	2500000
+tt0068646	movie	The Godfather	The Godfather	0	1972	\N	175	Crime,Drama	9.2	1900000
+tt0468569	movie	The Dark Knight	The Dark Knight	0	2008	\N	152	Action,Crime,Drama	9.0	2700000
+tt9999991	movie	Indie Darling	Indie Darling	0	2020	\N	98	Drama	9.1	50
+tt9999992	movie	"Movie, with Comma"	"Movie, with Comma"	0	1997	\N	\N	\N	8.5	500000
+tt9999993	movie	"测试中文 UTF-8 标题"	"测试中文 UTF-8 标题"	0	2024	\N	120	Sci-Fi	8.7	300000

@@ -1,0 +1,51 @@
+# Build directories
+build/
+build-*/
+cmake-build-*/
+_algo_build/
+
+# Visual Studio / VSCode
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln
+*.vcxproj*
+
+# Compiled artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.pdb
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# Data (large files)
+data/*.tsv
+data/*.tsv.gz
+!data/sample.tsv
+!data/README.md
+
+# Doxygen
+html/
+latex/
+.doxygen-tags
+*.tag
+
+# Misc
+Thumbs.db
+.DS_Store
+cmake_config.log
