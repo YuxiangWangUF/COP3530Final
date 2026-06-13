@@ -16,7 +16,7 @@ This repository is the modernized version of a 3-year-old COP 3530
 
 ---
 
-## Why this project is worth a look
+## Points
 
 1. **Algorithm depth.** Two textbook data structures implemented from
    scratch in modern C++17 — left-leaning red-black tree with sentinel
